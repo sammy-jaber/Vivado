@@ -1,0 +1,21 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity sevenseg is
+    Port ( SW : in STD_LOGIC_VECTOR (3 downto 0);
+           SEG : out STD_LOGIC_VECTOR (6 downto 0));
+end sevenseg;
+
+architecture Dataflow of sevenseg is
+
+begin
+
+SEG(0) <= Not(SW(0) OR SW(2) OR (SW(1) AND SW(3)) OR (NOT SW(1) AND NOT SW(3)));
+SEG(1) <= Not((NOT SW(1)) OR (NOT SW(2) AND NOT SW(3)) OR (SW(2) AND SW(3)));
+SEG(2) <= Not(SW(1) OR NOT SW(2) OR SW(3));
+SEG(3) <= Not((NOT SW(1) AND NOT SW(3)) OR (SW(2) AND NOT SW(3)) OR (SW(1) AND NOT SW(2) AND SW(3)) OR (NOT SW(1) AND SW(2)) OR SW(0));
+SEG(4) <= Not((NOT SW(1) AND NOT SW(3)) OR (SW(2) AND NOT SW(3)));
+SEG(5) <= Not(SW(0) OR (NOT SW(2) AND NOT SW(3)) OR (SW(1) AND NOT SW(2)) OR (SW(1) AND NOT SW(3)));
+SEG(6) <= Not(SW(0) OR (SW(1) AND NOT SW(2)) OR (NOT SW(1) AND SW(2)) OR (SW(2) AND NOT SW(3)));
+
+end Dataflow;
