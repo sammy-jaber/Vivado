@@ -1,0 +1,26 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity register_with_synch_rest_and_load is
+    Port ( d : in STD_LOGIC_VECTOR (3 downto 0);
+           clk : in STD_LOGIC;
+           rst : in STD_LOGIC;
+           load : in STD_LOGIC;
+           q : out STD_LOGIC_VECTOR (3 downto 0));
+end register_with_synch_rest_and_load;
+
+architecture Behavioral of register_with_synch_rest_and_load is
+
+begin
+process (clk)
+begin
+    if rising_edge(clk) then
+        if (rst = '1') then
+            q <= "0000";
+        elsif (load = '1') then
+            q <= d;
+        end if;
+    end if;
+
+end process;    
+end Behavioral;
